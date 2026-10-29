@@ -1,0 +1,597 @@
+{
+   "version":9,
+   "root":"2266BED7-6CC4-48A6-95DD-9BCD3CF9EAFC",
+   "metadata":{
+      "name":"Science Lab",
+      "creatorAttribution":"",
+      "allowRemixing":false,
+      "allowPromotion":false
+   },
+   "entities":{
+      "2266BED7-6CC4-48A6-95DD-9BCD3CF9EAFC":{
+         "name":"Science Lab",
+         "components":[
+            {
+               "name":"fog",
+               "props":{
+                  "type":"disabled",
+                  "color":"#ffffff",
+                  "near":0.0025,
+                  "far":1000,
+                  "density":0.0025
+               }
+            },
+            {
+               "name":"background",
+               "props":{
+                  "color":"#aaaaaa"
+               }
+            },
+            {
+               "name":"audio-settings",
+               "props":{
+                  "overrideAudioSettings":false,
+                  "avatarDistanceModel":"inverse",
+                  "avatarRolloffFactor":5,
+                  "avatarRefDistance":5,
+                  "avatarMaxDistance":10000,
+                  "mediaVolume":0.5,
+                  "mediaDistanceModel":"inverse",
+                  "mediaRolloffFactor":5,
+                  "mediaRefDistance":5,
+                  "mediaMaxDistance":10000,
+                  "mediaConeInnerAngle":360,
+                  "mediaConeOuterAngle":0,
+                  "mediaConeOuterGain":0.9
+               }
+            },
+            {
+               "name":"editor-settings",
+               "props":{
+                  "enabled":true,
+                  "modifiedProperties":{
+                     
+                  }
+               }
+            }
+         ]
+      },
+      "E8D3129B-68BF-473F-92B9-6DAEC83514BB":{
+         "name":"Skybox",
+         "components":[
+            {
+               "name":"transform",
+               "props":{
+                  "position":{
+                     "x":0,
+                     "y":0,
+                     "z":0
+                  },
+                  "rotation":{
+                     "x":0,
+                     "y":0,
+                     "z":0
+                  },
+                  "scale":{
+                     "x":1,
+                     "y":1,
+                     "z":1
+                  }
+               }
+            },
+            {
+               "name":"visible",
+               "props":{
+                  "visible":true
+               }
+            },
+            {
+               "name":"editor-settings",
+               "props":{
+                  "enabled":true,
+                  "modifiedProperties":{
+                     
+                  },
+                  "enabledProperties":{
+                     
+                  }
+               }
+            },
+            {
+               "name":"skybox",
+               "props":{
+                  "turbidity":6.09,
+                  "rayleigh":0.82,
+                  "luminance":1.055,
+                  "mieCoefficient":0.043,
+                  "mieDirectionalG":0.8,
+                  "inclination":0.10471975511965978,
+                  "azimuth":0.2333333333333333,
+                  "distance":8000
+               }
+            }
+         ],
+         "parent":"2266BED7-6CC4-48A6-95DD-9BCD3CF9EAFC",
+         "index":0
+      },
+      "D8061EA5-F0C4-4452-ADFE-B179E2F20CB1":{
+         "name":"Directional Light",
+         "components":[
+            {
+               "name":"transform",
+               "props":{
+                  "position":{
+                     "x":-1,
+                     "y":3,
+                     "z":0
+                  },
+                  "rotation":{
+                     "x":1.0256860445560714,
+                     "y":0.3490658503988659,
+                     "z":-0.4417643021697627
+                  },
+                  "scale":{
+                     "x":0.9999999999999996,
+                     "y":0.9999999999999998,
+                     "z":0.9999999999999997
+                  }
+               }
+            },
+            {
+               "name":"visible",
+               "props":{
+                  "visible":true
+               }
+            },
+            {
+               "name":"editor-settings",
+               "props":{
+                  "enabled":true,
+                  "modifiedProperties":{
+                     
+                  },
+                  "enabledProperties":{
+                     
+                  }
+               }
+            },
+            {
+               "name":"directional-light",
+               "props":{
+                  "color":"#ffffff",
+                  "intensity":3,
+                  "castShadow":true,
+                  "shadowMapResolution":[
+                     1024,
+                     1024
+                  ],
+                  "shadowBias":-0.000030000000000000004,
+                  "shadowRadius":1
+               }
+            }
+         ],
+         "parent":"2266BED7-6CC4-48A6-95DD-9BCD3CF9EAFC",
+         "index":1
+      },
+      "2D490729-384D-49AF-A755-9D6F70D56325":{
+         "name":"Floor Plan",
+         "components":[
+            {
+               "name":"transform",
+               "props":{
+                  "position":{
+                     "x":0,
+                     "y":0.005,
+                     "z":0
+                  },
+                  "rotation":{
+                     "x":0,
+                     "y":0,
+                     "z":0
+                  },
+                  "scale":{
+                     "x":1,
+                     "y":1,
+                     "z":1
+                  }
+               }
+            },
+            {
+               "name":"visible",
+               "props":{
+                  "visible":true
+               }
+            },
+            {
+               "name":"editor-settings",
+               "props":{
+                  "enabled":true,
+                  "modifiedProperties":{
+                     
+                  },
+                  "enabledProperties":{
+                     
+                  }
+               }
+            },
+            {
+               "name":"floor-plan",
+               "props":{
+                  "autoCellSize":false,
+                  "cellSize":0.1200000000000001,
+                  "cellHeight":0.1,
+                  "agentHeight":1.7,
+                  "agentRadius":0.19999999999999996,
+                  "agentMaxClimb":0.5,
+                  "agentMaxSlope":60,
+                  "regionMinSize":4,
+                  "maxTriangles":1000,
+                  "forceTrimesh":false,
+                  "navMeshMode":"automatic",
+                  "navMeshSrc":""
+               }
+            }
+         ],
+         "parent":"2266BED7-6CC4-48A6-95DD-9BCD3CF9EAFC",
+         "index":2
+      },
+      "704DB9E4-1EFF-4337-8CAB-5E55DCC7A18C":{
+         "name":"Plant_Cell_V6.glb",
+         "components":[
+            {
+               "name":"transform",
+               "props":{
+                  "position":{
+                     "x":1.696740627288818,
+                     "y":-1.7035398334264755,
+                     "z":1041.7998147010803
+                  },
+                  "rotation":{
+                     "x":0,
+                     "y":0,
+                     "z":0
+                  },
+                  "scale":{
+                     "x":1,
+                     "y":1,
+                     "z":1
+                  }
+               }
+            },
+            {
+               "name":"visible",
+               "props":{
+                  "visible":true
+               }
+            },
+            {
+               "name":"editor-settings",
+               "props":{
+                  "enabled":true,
+                  "modifiedProperties":{
+                     
+                  },
+                  "enabledProperties":{
+                     
+                  }
+               }
+            },
+            {
+               "name":"gltf-model",
+               "props":{
+                  "src":"https://hubs.local:4000/files/ec5e3018-855c-42b2-b181-cee7f0fe3963.glb",
+                  "attribution":{
+                     "title":"Plant_Cell_V6"
+                  }
+               }
+            },
+            {
+               "name":"shadow",
+               "props":{
+                  "cast":false,
+                  "receive":false
+               }
+            },
+            {
+               "name":"collidable",
+               "props":{
+                  
+               }
+            },
+            {
+               "name":"combine",
+               "props":{
+                  
+               }
+            },
+
+            {
+                "name": "draggable",  // Add the draggable component here
+                "props": {
+                    "enabled": true
+                },
+            }
+         ],
+         "parent":"2266BED7-6CC4-48A6-95DD-9BCD3CF9EAFC",
+         "index":3
+      },
+      "503FA29D-E4A2-4C52-B94D-DE13F2259CB8":{
+         "name":"Model",
+         "components":[
+            {
+               "name":"transform",
+               "props":{
+                  "position":{
+                     "x":0,
+                     "y":0,
+                     "z":0
+                  },
+                  "rotation":{
+                     "x":0,
+                     "y":0,
+                     "z":0
+                  },
+                  "scale":{
+                     "x":3,
+                     "y":3,
+                     "z":3
+                  }
+               }
+            },
+            {
+               "name":"visible",
+               "props":{
+                  "visible":true
+               }
+            },
+            {
+               "name":"editor-settings",
+               "props":{
+                  "enabled":true,
+                  "modifiedProperties":{
+                     
+                  },
+                  "enabledProperties":{
+                     
+                  }
+               }
+            },
+            {
+               "name":"gltf-model",
+               "props":{
+                  "src":"https://hubs.local:4000/files/105a0677-4781-4d06-9ce2-ebf605cc1664.glb",
+                  "attribution":{
+                     "author":"Kaine_G",
+                     "url":"https://sketchfab.com/3d-models/lab-scene-1ab1bd8157c0477e80b5ed8d658015b6",
+                     "title":"Lab scene"
+                  }
+               }
+            },
+            {
+               "name":"shadow",
+               "props":{
+                  "cast":false,
+                  "receive":false
+               }
+            },
+            {
+               "name":"collidable",
+               "props":{
+                  
+               }
+            },
+            {
+               "name":"combine",
+               "props":{
+                  
+               }
+            }
+         ],
+         "parent":"2266BED7-6CC4-48A6-95DD-9BCD3CF9EAFC",
+         "index":4
+      },
+      
+   "A01EC251-F1EE-4A74-A0C3-6BF50B93E304": {
+      "name": "Plant_Cell_V6.glb",
+      "components": [
+         {
+            "name": "transform",
+            "props": {
+               "position": {
+                  "x": -0.5,
+                  "y": 4.77401897634953,
+                  "z": -3.7873233749271553
+               },
+               "rotation": {
+                  "x": 0.7853981633974483,
+                  "y": 0.08726646259971647,
+                  "z": 0.08726646259971647
+               },
+               "scale": {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "z": 0.5
+               }
+            }
+         },
+         {
+            "name": "visible",
+            "props": {
+               "visible": true
+            }
+         },
+         {
+            "name": "editor-settings",
+            "props": {
+               "enabled": true,
+               "modifiedProperties": {},
+               "enabledProperties": {}
+            }
+         },
+         {
+            "name": "gltf-model",
+            "props": {
+               "src": "https://hubs.local:4000/files/ec5e3018-855c-42b2-b181-cee7f0fe3963.glb",
+               "attribution": {
+                  "title": "Plant_Cell_V6"
+               }
+            }
+         },
+         {
+            "name": "shadow",
+            "props": {
+               "cast": false,
+               "receive": false
+            }
+         },
+         {
+            "name": "collidable",
+            "props": {}
+         },
+         {
+            "name": "combine",
+            "props": {}
+         },
+         {
+            "name": "draggable",
+            "props": {
+               "enabled": true
+            }
+         },
+         {
+            "name": "custom-script",
+            "props": {
+               "script": "/components/draggable.js"  // Use the relative path for the server
+            }
+         }
+      ],
+      "parent": "2266BED7-6CC4-48A6-95DD-9BCD3CF9EAFC",
+      "index": 5
+   },
+   "BC236354-1239-4DB8-BA00-18D19A1AF224": {
+      "name": "simple_animal_cell_model.glb",
+      "components": [
+         {
+            "name": "transform",
+            "props": {
+               "position": {
+                  "x": 7.4974912711853126,
+                  "y": 5.107863370660663,
+                  "z": -3.044327886238933
+               },
+               "rotation": {
+                  "x": 0.7853981633974483,
+                  "y": 0,
+                  "z": 1.0471975511965976
+               },
+               "scale": {
+                  "x": 0.050000000000000044,
+                  "y": 0.050000000000000044,
+                  "z": 0.050000000000000044
+               }
+            }
+         },
+         {
+            "name": "visible",
+            "props": {
+               "visible": true
+            }
+         },
+         {
+            "name": "editor-settings",
+            "props": {
+               "enabled": true,
+               "modifiedProperties": {},
+               "enabledProperties": {}
+            }
+         },
+         {
+            "name": "gltf-model",
+            "props": {
+               "src": "https://hubs.local:4000/files/aefe92a9-d2df-44f6-abf1-a11214af8088.glb",
+               "attribution": {
+                  "author": "maryk",
+                  "url": "https://sketchfab.com/3d-models/simple-animal-cell-model-839832a82ead4d9ea3a748f48fd5de88",
+                  "title": "Simple Animal Cell Model"
+               }
+            }
+         },
+         {
+            "name": "shadow",
+            "props": {
+               "cast": false,
+               "receive": false
+            }
+         },
+         {
+            "name": "collidable",
+            "props": {}
+         },
+         {
+            "name": "combine",
+            "props": {}
+         },
+         {
+            "name": "draggable",
+            "props": {
+               "enabled": true
+            }
+         },
+         {
+            "name": "custom-script",
+            "props": {
+               "script": "/components/draggable.js"  // Use the relative path for the server
+            }
+         }
+      ],
+      "parent": "2266BED7-6CC4-48A6-95DD-9BCD3CF9EAFC",
+      "index": 6
+   },
+   "9A421C8D-03E6-49D7-AA20-584F79A208A5": {
+      "name": "Scene Preview Camera",
+      "components": [
+         {
+            "name": "transform",
+            "props": {
+               "position": {
+                  "x": 1.2597401463755558,
+                  "y": 4.612907006553659,
+                  "z": 4.743324701164943
+               },
+               "rotation": {
+                  "x": -0.03795977611217185,
+                  "y": -0.021480649954145416,
+                  "z": -0.0008157296215113658
+               },
+               "scale": {
+                  "x": 1,
+                  "y": 1,
+                  "z": 1
+               }
+            }
+         },
+         {
+            "name": "visible",
+            "props": {
+               "visible": true
+            }
+         },
+         {
+            "name": "editor-settings",
+            "props": {
+               "enabled": true,
+               "modifiedProperties": {},
+               "enabledProperties": {}
+            }
+         },
+         {
+            "name": "scene-preview-camera",
+            "props": {}
+         }
+      ],
+      "parent": "2266BED7-6CC4-48A6-95DD-9BCD3CF9EAFC",
+      "index": 7
+   }
+    }
+
+
