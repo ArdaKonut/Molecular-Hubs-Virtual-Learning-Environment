@@ -5,3 +5,9 @@
 !files/dev-reticulum.conf
 !services/reticulum/priv/dev-ssl.cert
 !services/reticulum/priv/dev-ssl.key
+
+!priv/
+!priv/perms.pub.pem
+!priv/perms.jwk.json
+!priv/fullchain.pem
+!priv/privkey.pem

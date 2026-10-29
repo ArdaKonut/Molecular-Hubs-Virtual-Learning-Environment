@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+basedir=$(cd "$(dirname "$0")/.." && pwd)
+command -v openssl >/dev/null
+command -v node >/dev/null
+umask 077
+mkdir -p "$basedir/priv"
+if [[ ! -f "$basedir/priv/privkey.pem" && ! -f "$basedir/priv/fullchain.pem" ]]; then
+  MSYS_NO_PATHCONV=1 openssl req -x509 -newkey rsa:2048 -sha256 -nodes -days 365 \
+    -keyout "$basedir/priv/privkey.pem" -out "$basedir/priv/fullchain.pem" \
+    -subj '/CN=hubs.local' \
+    -addext 'subjectAltName=DNS:hubs.local,DNS:hubs-proxy.local,DNS:hubs-assets.local,DNS:hubs-link.local,DNS:localhost,DNS:reticulum,DNS:dialog,DNS:hubs-client,DNS:hubs-admin,DNS:spoke,IP:127.0.0.1'
+fi
+[[ -f "$basedir/priv/privkey.pem" && -f "$basedir/priv/fullchain.pem" ]] || {
+  echo 'Incomplete TLS key/certificate pair in priv; restore the missing file before continuing.' >&2
+  exit 1
+}
+if [[ ! -f "$basedir/services/reticulum/container/dev-perms.pem" ]]; then
+  openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 \
+    -out "$basedir/services/reticulum/container/dev-perms.pem"
+fi
+openssl pkey -in "$basedir/services/reticulum/container/dev-perms.pem" \
+  -pubout -out "$basedir/priv/perms.pub.pem"
+node - "$basedir" <<'JS'
+const fs = require('fs');
+const crypto = require('crypto');
+const root = process.argv[2];
+const key = crypto.createPublicKey(fs.readFileSync(root + '/priv/perms.pub.pem'));
+fs.writeFileSync(root + '/priv/perms.jwk.json', JSON.stringify(key.export({format:'jwk'})) + '\n');
+JS
+printf '%s\n' 'Local keys ready. Trust priv/fullchain.pem locally before browser testing; never use these development keys in production.'
