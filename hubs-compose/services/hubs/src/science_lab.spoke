@@ -306,10 +306,10 @@
             },
 
             {
-                "name": "draggable",  // Add the draggable component here
+                "name": "draggable",
                 "props": {
                     "enabled": true
-                },
+                }
             }
          ],
          "parent":"2266BED7-6CC4-48A6-95DD-9BCD3CF9EAFC",
@@ -461,7 +461,7 @@
          {
             "name": "custom-script",
             "props": {
-               "script": "/components/draggable.js"  // Use the relative path for the server
+               "script": "/components/draggable.js"
             }
          }
       ],
@@ -540,7 +540,7 @@
          {
             "name": "custom-script",
             "props": {
-               "script": "/components/draggable.js"  // Use the relative path for the server
+               "script": "/components/draggable.js"
             }
          }
       ],
@@ -592,6 +592,5 @@
       "parent": "2266BED7-6CC4-48A6-95DD-9BCD3CF9EAFC",
       "index": 7
    }
-    }
-
-
+}
+}

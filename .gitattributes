@@ -14,3 +14,7 @@ hubs-compose/services/reticulum/container/trapped-mix text eol=lf
 hubs-compose/services/hubs/admin/webpack.config.js text eol=lf
 hubs-compose/services/hubs/webpack.config.js text eol=lf
 hubs-compose/services/reticulum/config/dev.exs text eol=lf
+
+hubs-compose/services/spoke/webpack.config.js text eol=lf
+
+.gitattributes text eol=lf

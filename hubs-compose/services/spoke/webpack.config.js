@@ -21,6 +21,15 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 function createHTTPSConfig() {
+    const keyPath = process.env.HTTPS_CERT_PRIVKEY;
+  const certPath = process.env.HTTPS_CERT_FULLCHAIN;
+
+  if (keyPath && certPath) {
+    return {
+      key: fs.readFileSync(keyPath),
+      cert: fs.readFileSync(certPath)
+    };
+  }
   // Generate certs for the local webpack-dev-server.
   if (fs.existsSync(path.join(__dirname, "certs"))) {
     const key = fs.readFileSync(path.join(__dirname, "certs", "key.pem"));

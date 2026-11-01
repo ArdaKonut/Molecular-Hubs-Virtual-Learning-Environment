@@ -122,6 +122,9 @@ services:
       context: .
       dockerfile: dockerfiles/spoke.Dockerfile
     environment:
+      HTTPS_CERT_PRIVKEY: /etc/ssl/privkey.pem
+      HTTPS_CERT_FULLCHAIN: /etc/ssl/fullchain.pem
+      NODE_EXTRA_CA_CERTS: /etc/ssl/fullchain.pem
       CORS_PROXY_SERVER: "hubs-proxy.local:4000"
       INTERNAL_HOSTNAME: spoke
     platform: linux/amd64
