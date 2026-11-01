@@ -42,6 +42,8 @@ services:
     command: npm run local
     environment:
       INTERNAL_HOSTNAME: hubs-admin
+      HTTPS_CERT_PRIVKEY: /etc/ssl/privkey.pem
+      HTTPS_CERT_FULLCHAIN: /etc/ssl/fullchain.pem
     healthcheck:
       test: ["CMD", "curl", "-fk", "https://localhost:8989/admin.html"]
     platform: linux/amd64
@@ -60,12 +62,14 @@ services:
     command: npm run local
     environment:
       INTERNAL_HOSTNAME: hubs-client
+      HTTPS_CERT_PRIVKEY: /etc/ssl/privkey.pem
+      HTTPS_CERT_FULLCHAIN: /etc/ssl/fullchain.pem
     healthcheck:
       start_period: 3m30s
       test: ["CMD", "curl", "-fk", "https://localhost:8080"]
     platform: linux/amd64
     ports:
-      - "8080:8080"
+      - "18080:8080"
     volumes:
       - hubs:/code
       # Mount the SSL certificate and private key into the container  # <--- ADDED
@@ -143,6 +147,7 @@ x-mutagen:
     defaults:
       ignore:
         paths:
+          - "/deps"
           - ".DS_Store"
           - ".gitignore"
           - "/certs/"

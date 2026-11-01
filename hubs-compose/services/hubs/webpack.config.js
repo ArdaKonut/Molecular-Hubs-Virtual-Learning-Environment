@@ -15,6 +15,15 @@ const request = require("request");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 function createHTTPSConfig() {
+  const keyPath = process.env.HTTPS_CERT_PRIVKEY;
+  const certPath = process.env.HTTPS_CERT_FULLCHAIN;
+
+  if (keyPath && certPath) {
+    return {
+      key: fs.readFileSync(keyPath),
+      cert: fs.readFileSync(certPath)
+    };
+  }
   // Generate certs for the local webpack-dev-server.
   if (fs.existsSync(path.join(__dirname, "certs"))) {
     const key = fs.readFileSync(path.join(__dirname, "certs", "key.pem"));
@@ -257,7 +266,7 @@ module.exports = async (env, argv) => {
         RETICULUM_SOCKET_SERVER: localDevHost,
         CORS_PROXY_SERVER: "hubs-proxy.local:4000",
         NON_CORS_PROXY_DOMAINS: `${localDevHost},dev.reticulum.io`,
-        BASE_ASSETS_PATH: `https://${localDevHost}:8080/`,
+        BASE_ASSETS_PATH: `https://${localDevHost}:18080/`,
         RETICULUM_SERVER: `${localDevHost}:4000`,
         POSTGREST_SERVER: "",
         ITA_SERVER: "",
@@ -340,6 +349,7 @@ module.exports = async (env, argv) => {
     devtool: argv.mode === "production" ? "source-map" : "inline-source-map",
     devServer: {
       client: {
+        webSocketURL: "wss://hubs.local:18080/ws",
         overlay: {
           errors: true,
           warnings: false

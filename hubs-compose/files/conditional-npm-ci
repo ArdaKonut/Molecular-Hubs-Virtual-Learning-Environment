@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 checksum='package-lock.sha512'
 
 if ! sha512sum --check --status $checksum 2>/dev/null; then

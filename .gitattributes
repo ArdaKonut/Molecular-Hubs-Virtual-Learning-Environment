@@ -7,3 +7,10 @@
 # Preserve Unix line endings for shell scripts
 *.sh text eol=lf
 hubs-compose/bin/** text eol=lf
+
+# Local development helpers and configuration
+hubs-compose/files/conditional-npm-ci text eol=lf
+hubs-compose/services/reticulum/container/trapped-mix text eol=lf
+hubs-compose/services/hubs/admin/webpack.config.js text eol=lf
+hubs-compose/services/hubs/webpack.config.js text eol=lf
+hubs-compose/services/reticulum/config/dev.exs text eol=lf

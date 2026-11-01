@@ -5,9 +5,16 @@ command -v openssl >/dev/null
 command -v node >/dev/null
 umask 077
 mkdir -p "$basedir/priv"
+tls_key_path="$basedir/priv/privkey.pem"
+tls_cert_path="$basedir/priv/fullchain.pem"
+
+if command -v cygpath >/dev/null 2>&1; then
+  tls_key_path=$(cygpath -m "$tls_key_path")
+  tls_cert_path=$(cygpath -m "$tls_cert_path")
+fi
 if [[ ! -f "$basedir/priv/privkey.pem" && ! -f "$basedir/priv/fullchain.pem" ]]; then
   MSYS_NO_PATHCONV=1 openssl req -x509 -newkey rsa:2048 -sha256 -nodes -days 365 \
-    -keyout "$basedir/priv/privkey.pem" -out "$basedir/priv/fullchain.pem" \
+    -keyout "$tls_key_path" -out "$tls_cert_path" \
     -subj '/CN=hubs.local' \
     -addext 'subjectAltName=DNS:hubs.local,DNS:hubs-proxy.local,DNS:hubs-assets.local,DNS:hubs-link.local,DNS:localhost,DNS:reticulum,DNS:dialog,DNS:hubs-client,DNS:hubs-admin,DNS:spoke,IP:127.0.0.1'
 fi
