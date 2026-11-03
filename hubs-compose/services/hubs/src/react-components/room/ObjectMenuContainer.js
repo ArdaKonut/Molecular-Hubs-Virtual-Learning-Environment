@@ -19,6 +19,8 @@ import { ReactComponent as AvatarIcon } from "../icons/Avatar.svg";
 import { ReactComponent as HideIcon } from "../icons/Hide.svg";
 import { FormattedMessage } from "react-intl";
 
+import { ObjectTransformControls } from "./ObjectTransformControls";
+
 function MyMenuItems({ onOpenProfile }) {
   return (
     <ObjectMenuButton onClick={onOpenProfile}>
@@ -109,6 +111,12 @@ function ObjectMenuItems({ hubChannel, scene, activeObject, deselectObject, onGo
           <FormattedMessage id="object-menu.delete-object-button" defaultMessage="Delete" />
         </span>
       </ObjectMenuButton>
+
+        <ObjectTransformControls
+          activeObject={activeObject}
+          disabled={!canPin || !canRemoveObject}
+          isPinned={isPinned}
+      />
     </>
   );
 }

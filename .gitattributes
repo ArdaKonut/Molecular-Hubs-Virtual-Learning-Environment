@@ -18,3 +18,6 @@ hubs-compose/services/reticulum/config/dev.exs text eol=lf
 hubs-compose/services/spoke/webpack.config.js text eol=lf
 
 .gitattributes text eol=lf
+
+hubs-compose/services/hubs/src/react-components/room/ObjectMenuContainer.js text eol=lf
+hubs-compose/services/hubs/src/react-components/room/ObjectTransformControls.js text eol=lf
