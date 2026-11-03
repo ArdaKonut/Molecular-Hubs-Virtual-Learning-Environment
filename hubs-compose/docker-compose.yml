@@ -109,6 +109,7 @@ services:
       HUBS_CLIENT_INTERNAL_HOSTNAME: hubs-client
       POSTGREST_INTERNAL_HOSTNAME: postgrest
       SPOKE_INTERNAL_HOSTNAME: spoke
+      ERL_AFLAGS: "+C multi_time_warp"
     ports:
       - "4000:4000"
     volumes:
