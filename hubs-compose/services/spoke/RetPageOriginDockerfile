@@ -1,12 +1,15 @@
+# syntax=docker/dockerfile:1
 ###
 # this dockerfile produces image/container that serves customly packaged spoke static files
 # the result container should serve reticulum as "spoke_page_origin" on (path) "/spoke/pages"
 ###
-from node:16.13 as builder
-run mkdir /spoke && cd /spoke
+FROM --platform=$BUILDPLATFORM node:16.13 AS builder
+WORKDIR /spoke
 copy package.json ./
 copy yarn.lock ./
-run yarn install --frozen-lockfile
+RUN --mount=type=cache,id=molecular-spoke-yarn,target=/usr/local/share/.cache/yarn \
+    yarn install --frozen-lockfile --non-interactive \
+    --network-timeout 600000 --network-concurrency 4 --verbose
 copy . .
 env BASE_ASSETS_PATH="{{rawspoke-base-assets-path}}"
 # TODO we should be setting BUILD_VERSION, probably pass in git sha or run number as an ARG
@@ -15,7 +18,7 @@ run mkdir -p dist/pages && mv dist/*.html dist/pages
 # TODO can't we just move this directly from dist to /www ?
 run mkdir /spoke/rawspoke && mv dist/pages /spoke/rawspoke && mv dist/assets /spoke/rawspoke
 
-from alpine/openssl as ssl
+FROM --platform=$BUILDPLATFORM alpine/openssl AS ssl
 run mkdir /ssl && openssl req -x509 -newkey rsa:2048 -sha256 -days 36500 -nodes -keyout /ssl/key -out /ssl/cert -subj '/CN=spoke'
 
 from nginx:alpine

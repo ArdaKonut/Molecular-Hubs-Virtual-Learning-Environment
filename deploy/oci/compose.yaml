@@ -1,0 +1,29 @@
+name: molecular-hubs-production
+
+services:
+  db:
+    image: postgres:14-alpine
+    restart: unless-stopped
+    stop_grace_period: 1m
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: ret_production
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+    secrets:
+      - postgres_password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ret_production"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+secrets:
+  postgres_password:
+    file: ./secrets/postgres-password
+
+volumes:
+  pgdata:
+    external: true
+    name: molecular-hubs-production_pgdata

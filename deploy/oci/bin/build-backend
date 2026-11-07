@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+service=${1:-}
+mode=${2:-}
+if [[ "$service" != reticulum && "$service" != dialog ]] ||
+   [[ -n "$mode" && "$mode" != --dry-run ]] || (( $# > 2 )); then
+  echo "Usage: $0 {reticulum|dialog} [--dry-run]" >&2
+  exit 2
+fi
+
+oci=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
+repo=$(cd -- "$oci/../.." && pwd)
+
+case "$service" in
+  reticulum) title=Reticulum ;;
+  dialog) title=Dialog ;;
+esac
+
+run() {
+  if [[ "$mode" == --dry-run ]]; then
+    printf '%q ' "$@"
+    printf '\n'
+  else
+    "$@"
+  fi
+}
+
+if [[ "$mode" != --dry-run ]]; then
+  arch=$(docker info --format '{{.Architecture}}')
+  [[ "$arch" == aarch64 || "$arch" == arm64 ]] || {
+    echo "Run backend builds on the ARM Ubuntu VM." >&2
+    exit 1
+  }
+fi
+
+run docker build --platform linux/arm64 --progress=plain \
+  -f "$oci/docker/${title}Build.Dockerfile" \
+  -t "molecular-hubs/${service}-build-check:arm64" \
+  "$repo/hubs-compose/services/$service"
+
+run docker build --platform linux/arm64 --progress=plain \
+  -f "$oci/docker/${title}.Dockerfile" \
+  -t "molecular-hubs/${service}-runtime:arm64" \
+  "$oci/docker"

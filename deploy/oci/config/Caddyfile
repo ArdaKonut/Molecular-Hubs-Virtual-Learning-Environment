@@ -1,0 +1,42 @@
+molecular-hubs-ardakonut.duckdns.org {
+    reverse_proxy reticulum:4001
+}
+
+link.molecular-hubs-ardakonut.duckdns.org {
+    reverse_proxy reticulum:4001
+}
+
+assets.molecular-hubs-ardakonut.duckdns.org {
+
+    handle / {
+        header Access-Control-Allow-Origin "https://molecular-hubs-ardakonut.duckdns.org"
+        respond "" 204
+    }
+
+    handle /hubs/* {
+        reverse_proxy hubs:8080
+    }
+
+    handle /spoke/* {
+        reverse_proxy spoke:8080
+    }
+
+    handle {
+        reverse_proxy reticulum:4001
+    }
+}
+
+cors.molecular-hubs-ardakonut.duckdns.org {
+    reverse_proxy reticulum:4001
+}
+
+dialog.molecular-hubs-ardakonut.duckdns.org {
+    reverse_proxy https://dialog:4443 {
+        transport http {
+            tls_server_name dialog
+            tls_trust_pool file {
+                pem_file /etc/caddy/internal-ca.pem
+            }
+        }
+    }
+}
