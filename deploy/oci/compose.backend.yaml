@@ -2,7 +2,7 @@ services:
   reticulum:
     image: molecular-hubs/reticulum-runtime:arm64
     hostname: reticulum.internal
-    restart: "no"
+    restart: unless-stopped
     stop_grace_period: 1m
     env_file:
       - ./secrets/reticulum.env

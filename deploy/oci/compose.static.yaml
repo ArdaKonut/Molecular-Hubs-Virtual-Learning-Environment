@@ -13,7 +13,7 @@ services:
       turkeyCfg_sentry_dsn: ""
       turkeyCfg_ga_tracking_id: ""
     volumes:
-      - ./config/static-nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ${OCI_PUBLIC_CONFIG_DIR:?use_the_deployment_wrapper}/static-nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - ./config/branding:/www/hubs/branding:ro
 
   spoke:
@@ -29,4 +29,4 @@ services:
       turkeyCfg_sentry_dsn: ""
       turkeyCfg_ga_tracking_id: ""
     volumes:
-      - ./config/static-nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ${OCI_PUBLIC_CONFIG_DIR:?use_the_deployment_wrapper}/static-nginx.conf:/etc/nginx/conf.d/default.conf:ro

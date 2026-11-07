@@ -1,7 +1,7 @@
 services:
   dialog:
     image: molecular-hubs/dialog-runtime:arm64
-    restart: "no"
+    restart: unless-stopped
     init: true
     ports:
       - "40000-40050:40000-40050/udp"
