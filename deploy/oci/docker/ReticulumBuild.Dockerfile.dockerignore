@@ -1,0 +1,14 @@
+.git
+node_modules
+deps
+_build
+.env
+.env.*
+priv/*.pem
+priv/*.key
+container/dev-perms.pem
+certs
+secrets
+*.pem
+*.key
+*.log

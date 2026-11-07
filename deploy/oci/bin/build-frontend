@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+service=${1:-}
+builder=${2:-}
+output=${3:-}
+mode=${4:-}
+
+if [[ "$service" != hubs && "$service" != spoke ]] ||
+   [[ -z "$builder" || -z "$output" ]] ||
+   [[ -n "$mode" && "$mode" != --dry-run ]] || (( $# > 4 )); then
+  echo "Usage: $0 {hubs|spoke} BUILDER OUTPUT.tar [--dry-run]" >&2
+  exit 2
+fi
+
+oci=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
+repo=$(cd -- "$oci/../.." && pwd)
+context="$repo/hubs-compose/services/$service"
+partial="${output}.partial"
+
+if [[ "$mode" != --dry-run ]]; then
+  [[ ! -e "$output" && ! -e "$partial" ]] || {
+    echo "Destination or partial archive exists; choose a new filename." >&2
+    exit 1
+  }
+
+  arch=$(docker info --format '{{.Architecture}}')
+  [[ "$arch" == x86_64 || "$arch" == amd64 ]] || {
+    echo "Build frontends on your AMD64 Docker host, not the ARM VM." >&2
+    exit 1
+  }
+
+  docker buildx inspect "$builder" --bootstrap
+  details=$(docker buildx inspect "$builder")
+  [[ "$details" == *docker-container* ]] || {
+    echo "Select your existing local docker-container builder." >&2
+    exit 1
+  }
+fi
+
+command=(docker buildx build --builder "$builder"
+  --platform linux/arm64 --progress=plain
+  -f "$context/RetPageOriginDockerfile"
+  -t "molecular-hubs/${service}-static-check:arm64"
+  --output "type=docker,dest=$partial" "$context")
+
+if [[ "$mode" == --dry-run ]]; then
+  printf '%q ' "${command[@]}"
+  printf '\n'
+else
+  "${command[@]}"
+  [[ ! -e "$output" ]] || {
+    echo "Destination appeared during build; partial archive retained." >&2
+    exit 1
+  }
+  mv -- "$partial" "$output"
+  sha256sum -- "$output"
+  echo "ARM image archive created. No deployment services changed."
+fi

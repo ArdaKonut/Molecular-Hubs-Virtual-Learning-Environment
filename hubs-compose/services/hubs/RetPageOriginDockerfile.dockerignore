@@ -1,0 +1,12 @@
+.git
+node_modules
+admin/node_modules
+dist
+admin/dist
+.env
+.env.*
+certs
+secrets
+*.pem
+*.key
+*.log

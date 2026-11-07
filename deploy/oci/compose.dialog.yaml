@@ -1,0 +1,24 @@
+services:
+  dialog:
+    image: molecular-hubs/dialog-runtime:arm64
+    restart: "no"
+    init: true
+    ports:
+      - "40000-40050:40000-40050/udp"
+      - "40000-40050:40000-40050/tcp"
+    stop_grace_period: 30s
+    environment:
+      DOMAIN: dialog.molecular-hubs-ardakonut.duckdns.org
+      INTERACTIVE: "false"
+      PROTOO_LISTEN_PORT: "4443"
+      ADMIN_LISTEN_PORT: "7000"
+      HTTPS_CERT_FULLCHAIN: /run/dialog-tls/fullchain.pem
+      HTTPS_CERT_PRIVKEY: /run/dialog-tls/privkey.pem
+      AUTH_KEY: /run/dialog-perms-public.pem
+      MEDIASOUP_LISTEN_IP: "0.0.0.0"
+      MEDIASOUP_ANNOUNCED_IP: "82.70.223.184"
+      MEDIASOUP_MIN_PORT: "40000"
+      MEDIASOUP_MAX_PORT: "40050"
+    volumes:
+      - ./secrets/dialog-tls:/run/dialog-tls:ro
+      - ./config/dialog-perms-public.pem:/run/dialog-perms-public.pem:ro

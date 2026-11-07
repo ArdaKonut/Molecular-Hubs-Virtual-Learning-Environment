@@ -1,0 +1,17 @@
+services:
+  postgrest:
+    image: postgrest/postgrest:v9.0.1
+    restart: unless-stopped
+    env_file:
+      - ./secrets/postgrest.env
+    environment:
+      PGRST_DB_SCHEMA: ret0_admin
+      PGRST_DB_ANON_ROLE: postgrest_anonymous
+      PGRST_JWT_SECRET: "@/run/perms-public.jwk"
+      PGRST_JWT_AUD: ret_perms
+      PGRST_ROLE_CLAIM_KEY: ".postgrest_role"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./config/perms-public.jwk:/run/perms-public.jwk:ro

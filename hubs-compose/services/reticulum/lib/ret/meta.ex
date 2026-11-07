@@ -11,7 +11,7 @@ defmodule Ret.Meta do
       phx_host:
         module_config(:phx_host) ||
           :net_adm.localhost() |> :net_adm.dns_hostname() |> elem(1) |> to_string,
-      phx_port: Application.get_env(:ret, RetWeb.Endpoint)[:https][:port] |> to_string,
+      phx_port: Application.get_env(:ret, RetWeb.Endpoint)[:url][:port] |> to_string,
       pool: Application.get_env(:ret, Ret)[:pool]
     }
   end
