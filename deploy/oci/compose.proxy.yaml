@@ -1,0 +1,16 @@
+services:
+  proxy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ${OCI_PUBLIC_CONFIG_DIR:?use_the_deployment_wrapper}/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./config/internal-ca.pem:/etc/caddy/internal-ca.pem:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:

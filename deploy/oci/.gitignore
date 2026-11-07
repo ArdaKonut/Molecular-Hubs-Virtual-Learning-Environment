@@ -1,0 +1,14 @@
+.env
+secrets/
+backups/
+*.dump
+*.tar.gz
+config/branding/
+config/internal-ca.pem
+config/dialog-perms-public.pem
+config/perms-public.jwk
+
+__pycache__/
+*.pyc
+artifacts/
+*.tar

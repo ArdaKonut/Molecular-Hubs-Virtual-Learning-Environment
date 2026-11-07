@@ -1,0 +1,29 @@
+services:
+  reticulum:
+    image: molecular-hubs/reticulum-runtime:arm64
+    hostname: reticulum.internal
+    restart: unless-stopped
+    stop_grace_period: 1m
+    env_file:
+      - ./secrets/reticulum.env
+    environment:
+      NODE_NAME: reticulum.internal
+      TURKEY_MODE: "1"
+      ERL_AFLAGS: "+C multi_time_warp"
+      RELEASE_CONFIG_DIR: /run/ret-config
+      POSTGREST_INTERNAL_HOSTNAME: postgrest
+    depends_on:
+      db:
+        condition: service_healthy
+      hubs:
+        condition: service_started
+      spoke:
+        condition: service_started
+    volumes:
+      - ./secrets/ret-config:/run/ret-config:ro
+      - retstorage:/storage
+
+volumes:
+  retstorage:
+    external: true
+    name: molecular-hubs-production_retstorage-migrated
